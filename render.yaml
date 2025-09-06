@@ -1,0 +1,18 @@
+services:
+  - name: breakout-scanner-backend
+    type: web
+    env: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+  - name: breakout-scanner-frontend
+    type: static
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE
+        value: https://breakout-scanner-backend.onrender.com
