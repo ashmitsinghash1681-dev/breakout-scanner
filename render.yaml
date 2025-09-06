@@ -1,21 +1,19 @@
-# render.yaml — backend (FastAPI) + frontend (Static Site)
-
 services:
   # Backend API (FastAPI)
   - name: breakout-scanner-backend
     type: web
-    runtime: python          # (use runtime, not env)
+    runtime: python
     rootDir: backend
-    plan: free
+    # plan: starter   # ← uncomment if you want to pin it; otherwise omit and pick in UI
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
 
-  # Frontend (React/Vite static site)
+  # Frontend (React/Vite static)
   - name: breakout-scanner-frontend
     type: web
-    runtime: static          # <-- this is how you declare a static site
+    runtime: static
     rootDir: frontend
-    plan: free
+    # plan: free      # ← optional; can omit
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
