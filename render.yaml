@@ -1,3 +1,5 @@
+# render.yaml  — backend (web service) + frontend (static site)
+
 services:
   - name: breakout-scanner-backend
     type: web
@@ -7,8 +9,8 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
 
+staticSites:
   - name: breakout-scanner-frontend
-    type: static_site
     rootDir: frontend
     plan: free
     buildCommand: npm install && npm run build
